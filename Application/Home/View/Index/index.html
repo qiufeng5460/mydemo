@@ -1,0 +1,112 @@
+<!--
+index.html视图
+未登录时默认首页状态
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>My demo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="__PUBLIC__/jumbotron.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+		
+        <div id="navbar" class="navbar-collapse collapse">
+		
+			<ul class="nav navbar-nav" id="maintab">
+			    <li class="active"><a href="#status" >状态</a></li>
+                <li><a href="#profile">profile</a></li>
+                <li><a href="#message">message</a></li>
+			</ul>	
+		     
+			<form action="{:U('Login/login')}" method="post" class="navbar-form navbar-right">
+                <div class="form-group has-feedback">
+                    <input type="text" name="username" placeholder="用户名" class="form-control" required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+                <div class="form-group has-feedback">				
+                    <input type="password" name="password" placeholder="密码" class="form-control" required>
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				</div>	
+                    <button type="submit" class="btn btn-success">登陆</button>
+					<a href="{:U('Register/register')}" class="btn btn-success"> 注册新用户</a>
+            </form>
+
+	    			
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+	    <div class="tab-content">
+           <div class="tab-pane active" id="status"> 
+		       <h1>你好</h1>
+               <p>没有登陆哦.</p>
+		   </div>
+		   <div class="tab-pane" id="profile"> 
+		       <h1>Two</h1>
+               <p>This is profile.</p>
+		   </div>
+		   <div class="tab-pane" id="message"> 
+		       <h1>Three</h1>
+               <p>This is message.</p>
+		   </div>
+		</div>
+      
+	  </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+	  
+       <footer>
+        <p>&copy; Company 2016</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script>
+    $('#maintab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');	  
+    });
+</script>
+	
+  </body>
+</html>

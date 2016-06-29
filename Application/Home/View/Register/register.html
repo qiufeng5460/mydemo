@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My demo</title>
+
+
+	
+    <!-- Bootstrap core CSS -->
+    <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="__PUBLIC__/register.css" rel="stylesheet">
+    
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form action="{:U('Register/do_register')}" method="post" class="form-signin">
+        <h2 class="form-signin-heading">请注册</h2>
+        <div class="register-input-group">
+           <div class="has-feedback">
+              <input type="text" name="username" class="form-control" placeholder="用户名,必填" required autofocus>
+              <span class="glyphicon glyphicon-user form-control-feedback"></span>	
+		   </div>
+		   <div class="has-feedback">
+		      <input type="text" name="nickname" class="form-control" placeholder="昵称,可选">
+		      <span class="glyphicon glyphicon-knight form-control-feedback"></span>	
+		   </div>
+		   <div class="has-feedback">
+	          <input type="password" name="password" class="form-control" placeholder="密码,必填" required>
+		      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+           </div>
+		   <div class="has-feedback">
+		      <input type="password" name="repassword" class="form-control" placeholder="确认密码,必填" required>
+		      <span class="glyphicon glyphicon-lock form-control-feedback"></span>	
+		   </div>
+		   <div class="has-feedback">
+		      <input type="text" name="mobile" class="form-control" placeholder="手机号码,可选">
+              <span class="glyphicon glyphicon-phone form-control-feedback"></span>	
+		   </div>
+		</div>
+		
+		<div class="btn-group btn-group-justified" role="group">
+		   <div class="btn-group" role="group">
+              <button class="btn btn-lg btn-primary " type="submit">注册</button>
+		   </div>
+		   <div class="btn-group" role="group">
+		      <a href="{:U('Index/index')}" class="btn btn-lg btn-primary">取消</a>
+		   </div>
+        </div>
+	  </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
