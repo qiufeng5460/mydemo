@@ -13,10 +13,12 @@
 # 只忽略当前目录下的dbg文件和目录，子目录的dbg不在忽略范围内
 #/dbg
 
-#忽略phpMyAdmin,ThinkPHP,phpinfo.php
+#忽略phpMyAdmin,ThinkPHP,phpinfo.php,l.php
 phpMyAdmin
 ThinkPHP
 phpinfo.php
+l.php
+
 #忽略Application下的Runtime中的文件,但保留Runtime文件夹
 Application/Runtime
 
