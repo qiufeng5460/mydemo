@@ -22,11 +22,11 @@ class LoginController extends Controller {
     {
         // 判断用户是否登录
         if (session('uid')) {
-            $this->userid = session('uid');
+         //   $this->userid = session('uid');
 	    // 获取当前账户的登录信息
-        $info = M('users')->where(array('id' => $userid))->find();
+        //$info = M('users')->where(array('id' => $userid))->find();
 
-        $this->assign('info', $info);
+        //$this->assign('info', $info);
         //$this->assign('SERVER_SOFTWARE', $_SERVER['SERVER_SOFTWARE']);
         //$this->display();
         } 
@@ -71,11 +71,11 @@ class LoginController extends Controller {
                 M('users')->where($where)->save($data);   // 更新登录时间和登录ip
                 
 				//更新模板信息
-				//$this->assign('info', $result);
+				$this->assign('info', $result);
 				
-                $this->success('登录成功,正跳转...',U('Login/login'));
+                //$this->success('登录成功,正跳转...',U('Login/login'));
 				//$this->success('登录成功,正跳转...');
-				//$this->display();
+				$this->display();
             } else {
                 $this->error('登录失败,用户名或密码不正确!');
             }

@@ -20,7 +20,8 @@ login.html视图
 
     <!-- Bootstrap core CSS -->
     <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- Bootstrap-submenu CSS -->
+    <link href="__PUBLIC__/bootstrap-submenu-2.0.4/css/bootstrap-submenu.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="__PUBLIC__/jumbotron.css" rel="stylesheet">
 
@@ -66,8 +67,55 @@ login.html视图
                <p>{$info['nickname']}</p>
 		   </div>
 		   <div class="tab-pane" id="profile"> 
-		       <h1>Two</h1>
-               <p>This is profile.</p>
+		   <div class="row">
+		       <!--天气-->
+			   <div class="col-sm-6">
+			   <h2>天气查询</h2>
+               <div class="dropdown">
+			      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
+                      选择城市 <span class="caret"></span>
+                  </button>
+				  <ul class="dropdown-menu">
+				      <li><a href="#">北京</a></li>
+					  <li><a href="#">上海</a></li>
+					  <li><a href="#">重庆</a></li>
+					  <li class="dropdown-submenu">
+					      <a href="#">辽宁</a>
+						  <ul class="dropdown-menu">
+						      <li><a  href="#">沈阳</a></li>
+                              <li><a  href="#">大连</a></li>
+                              <li><a  href="#">朝阳</a></li>
+						  </ul>
+					  </li>
+					  
+				  </ul>
+			    </div>
+		        </div>
+			   <!--天气-->
+			   <!--空气质量-->
+			   <div class="col-sm-6">
+			   <h2>空气质量</h2>
+               <div class="dropdown">
+			      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
+                      选择城市 <span class="caret"></span>
+                  </button>
+				  <ul class="dropdown-menu">
+				      <li><a href="#">北京</a></li>
+					  <li><a href="#">上海</a></li>
+					  <li><a href="#">重庆</a></li>
+					  <li class="dropdown-submenu">
+					      <a href="#">辽宁</a>
+						  <ul class="dropdown-menu">
+						      <li><a  href="#">沈阳</a></li>
+                              <li><a  href="#">大连</a></li>
+                              <li><a  href="#">朝阳</a></li>
+						  </ul>
+					  </li>
+				<!--空气质量-->	  
+				  </ul>
+			   </div>
+		       </div>
+		   </div>  
 		   </div>
 		   <div class="tab-pane" id="message"> 
 		       <h1>Three</h1>
@@ -92,6 +140,7 @@ login.html视图
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/bootstrap-submenu-2.0.4/js/bootstrap-submenu.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script>
@@ -99,7 +148,11 @@ login.html视图
       e.preventDefault();
       $(this).tab('show');	  
     });
-</script>
+
+	$('[data-submenu]').submenupicker();
+	
+    </script>
+	
 	
   </body>
 </html>
