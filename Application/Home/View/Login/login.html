@@ -20,11 +20,12 @@ login.html视图
 
     <!-- Bootstrap core CSS -->
     <link href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap-submenu CSS -->
+    <!-- Bootstrap-submenu CSS 
     <link href="__PUBLIC__/bootstrap-submenu-2.0.4/css/bootstrap-submenu.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
+    -->
+	<!-- Custom styles for this template -->
     <link href="__PUBLIC__/jumbotron.css" rel="stylesheet">
-
+	
   </head>
 
   <body>
@@ -71,7 +72,21 @@ login.html视图
 		       <!--天气-->
 			   <div class="col-sm-6">
 			   <h2>天气查询</h2>
-               <div class="dropdown">
+			   <form name=form_weather class="form-inline" action="{:U('Login/weather')}" method="post">
+                  <select name=province onchange="cityName(this.selectedIndex)" class="form-control">
+                  <option value="">请选择省名</option>
+                  </select>
+
+                  <select name=city class="form-control">
+                  <option value="">请选择城名</option>
+                  </select>
+				  
+				  <button type="submit" class="btn btn-default">提交</button>
+                </form>
+				<p>where:{$weather_result}</p>
+				
+               <!--不用dropmenu,而是用select
+			   <div class="dropdown">
 			      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
                       选择城市 <span class="caret"></span>
                   </button>
@@ -90,11 +105,14 @@ login.html视图
 					  
 				  </ul>
 			    </div>
-		        </div>
+		        -->
+				</div>
 			   <!--天气-->
 			   <!--空气质量-->
 			   <div class="col-sm-6">
 			   <h2>空气质量</h2>
+
+			   <!--不用dropment, 而是用select
                <div class="dropdown">
 			      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
                       选择城市 <span class="caret"></span>
@@ -111,9 +129,10 @@ login.html视图
                               <li><a  href="#">朝阳</a></li>
 						  </ul>
 					  </li>
-				<!--空气质量-->	  
+				  
 				  </ul>
 			   </div>
+			   -->
 		       </div>
 		   </div>  
 		   </div>
@@ -140,16 +159,27 @@ login.html视图
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    
+	<script src="__PUBLIC__/checkCity.js"></script>
+	
+	<!--
 	<script src="__PUBLIC__/bootstrap-submenu-2.0.4/js/bootstrap-submenu.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script>
     $('#maintab a').click(function (e) {
       e.preventDefault();
       $(this).tab('show');	  
     });
-
-	$('[data-submenu]').submenupicker();
+    
+    //for init cities
+	$(function(){
+	  province();
+	});
+	
+	//取消submenu
+	//$('[data-submenu]').submenupicker();
 	
     </script>
 	

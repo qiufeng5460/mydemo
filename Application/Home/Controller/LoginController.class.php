@@ -17,6 +17,7 @@ class LoginController extends Controller {
     
 	    /* 定义用户id */
     public static $userid = '';
+	public static $weather_result='';
 
 	public function _initialize()
     {
@@ -95,5 +96,13 @@ class LoginController extends Controller {
 		header('Content-Type:text/html; charset=utf-8');//解决redirect输出中文乱码问题
         redirect(U('Index/index'), 2,'正在退出,请稍等...');
     }
+	
+	//天气信息
+	public function weather()
+	{
+		$weather_result="Hello, Beijing";
+		$this->assign('weather_result',$weather_result);
+		$this->display('login');
+	}
     
 }
