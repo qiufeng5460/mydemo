@@ -52,7 +52,7 @@ login.html视图
 			<form action="{:U('Login/logout')}" method="post" class="navbar-form navbar-right">
 				<button type="submit" class="btn btn-success btn-sm">退出</button>
             </form>
-            <p class="navbar-text navbar-right">您好！{$info['nickname']}</p>
+            <p class="navbar-text navbar-right">您好!{$info}!</p>
 			
 	    			
         </div><!--/.navbar-collapse -->
@@ -64,76 +64,50 @@ login.html视图
       <div class="container">
 	    <div class="tab-content">
            <div class="tab-pane active" id="status"> 
-		       <h1>你好</h1>
-               <p>{$info['nickname']}</p>
+		       <h1>你好!{$info}!</h1>
+  
 		   </div>
 		   <div class="tab-pane" id="profile"> 
 		   <div class="row">
 		       <!--天气-->
-			   <div class="col-sm-6">
+			   <div name=div_weather class="col-sm-6">
 			   <h2>天气查询</h2>
-			   <form name=form_weather class="form-inline" action="{:U('Login/weather')}" method="post">
-                  <select name=province onchange="cityName(this.selectedIndex)" class="form-control">
+			    <!--no form submission for ajax-->
+				<!--<form name=form_weather class="form-inline" action="{:U('Login/weather')}" method="post">-->
+                
+				  <div class="row">
+				  <div class="col-sm-5">
+				  <select name=province onchange="cityName(this.selectedIndex)" class="form-control" id="weather_province">
                   <option value="">请选择省名</option>
                   </select>
-
-                  <select name=city class="form-control">
+                  </div>
+				  <div class="col-sm-5">
+                  <select name=city class="form-control" id="weather_city">
                   <option value="">请选择城名</option>
                   </select>
-				  
-				  <button type="submit" class="btn btn-default">提交</button>
-                </form>
-				<p>where:{$weather_result}</p>
+				  </div>
+				  <div class="col-sm-2">
+				  <button type="submit" class="btn btn-default" id="submit_weather">提交</button>
+                  </div>
+				  </div>  
 				
-               <!--不用dropmenu,而是用select
-			   <div class="dropdown">
-			      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
-                      选择城市 <span class="caret"></span>
-                  </button>
-				  <ul class="dropdown-menu">
-				      <li><a href="#">北京</a></li>
-					  <li><a href="#">上海</a></li>
-					  <li><a href="#">重庆</a></li>
-					  <li class="dropdown-submenu">
-					      <a href="#">辽宁</a>
-						  <ul class="dropdown-menu">
-						      <li><a  href="#">沈阳</a></li>
-                              <li><a  href="#">大连</a></li>
-                              <li><a  href="#">朝阳</a></li>
-						  </ul>
-					  </li>
-					  
-				  </ul>
-			    </div>
-		        -->
+				<!--</form>-->
+				<!--<div id="get_data">"result"</div>-->
+				<div class="panel panel-info">
+				   <div class="panel-heading" id="city_info">
+				      <!--<h3 class="title"></h3>-->
+				   </div>
+				   <div class="panel-body" id="weather_info"></div>
 				</div>
+				</div>
+				
 			   <!--天气-->
 			   <!--空气质量-->
 			   <div class="col-sm-6">
 			   <h2>空气质量</h2>
 
-			   <!--不用dropment, 而是用select
-               <div class="dropdown">
-			      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
-                      选择城市 <span class="caret"></span>
-                  </button>
-				  <ul class="dropdown-menu">
-				      <li><a href="#">北京</a></li>
-					  <li><a href="#">上海</a></li>
-					  <li><a href="#">重庆</a></li>
-					  <li class="dropdown-submenu">
-					      <a href="#">辽宁</a>
-						  <ul class="dropdown-menu">
-						      <li><a  href="#">沈阳</a></li>
-                              <li><a  href="#">大连</a></li>
-                              <li><a  href="#">朝阳</a></li>
-						  </ul>
-					  </li>
-				  
-				  </ul>
-			   </div>
-			   -->
 		       </div>
+			   <!--空气质量-->			   
 		   </div>  
 		   </div>
 		   <div class="tab-pane" id="message"> 
@@ -171,12 +145,33 @@ login.html视图
     $('#maintab a').click(function (e) {
       e.preventDefault();
       $(this).tab('show');	  
-    });
+    }); 
     
     //for init cities
 	$(function(){
 	  province();
 	});
+	
+	//ajax weather info
+	$("#submit_weather").click(function(){
+
+      var weather_province=$("#weather_province").val();
+      var weather_city=$("#weather_city").val();
+
+
+	  $.ajax({
+	     type:"POST",
+		 url:"{:U('Login/weather')}",
+		 data:{"weather_province" : weather_province,
+					 "weather_city" : weather_city},
+		 dataType:"json",
+		 success:function(data){
+	    	   console.log("%o",data);
+     		   $("#city_info").html("<h3 class='title'>"+data.province+"</h3>");
+			   $("#weather_info").html(data.city);
+		 }
+	  });
+    });
 	
 	//取消submenu
 	//$('[data-submenu]').submenupicker();

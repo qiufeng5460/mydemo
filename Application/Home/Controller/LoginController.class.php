@@ -72,9 +72,8 @@ class LoginController extends Controller {
                 M('users')->where($where)->save($data);   // 更新登录时间和登录ip
                 
 				//更新模板信息
-				$this->assign('info', $result);
+				$this->assign('info', $result['nickname']);
 				
-                //$this->success('登录成功,正跳转...',U('Login/login'));
 				//$this->success('登录成功,正跳转...');
 				$this->display();
             } else {
@@ -100,9 +99,18 @@ class LoginController extends Controller {
 	//天气信息
 	public function weather()
 	{
-		$weather_result="Hello, Beijing";
-		$this->assign('weather_result',$weather_result);
-		$this->display('login');
+		//$weather_result="Hello, Beijing";
+		//$result['nickname'] = session('nickname');
+		//$this->assign('info', $result['nickname']);
+		//$this->assign('weather_result',$weather_result);
+		//$this->display('login');
+		
+        //use json method		
+		$province=$_POST['weather_province'];
+		$city=$_POST['weather_city'];
+        $response=array("province"=>$province,"city"=>$city);		
+        echo json_encode($response);
+
 	}
     
 }

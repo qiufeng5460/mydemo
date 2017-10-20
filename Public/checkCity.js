@@ -78,13 +78,13 @@ var provinceName = ["北京市","上海市","天津市","重庆市","河北省",
 function province() 
 {
 
-var e = document.form_weather.province; 
+var e = document.getElementById("weather_province"); 
 for (var i=0; i<provinceName.length; i++) 
 e.options.add(new Option(provinceName[i], provinceName[i])); 
 } 
 function cityName(n) 
 { 
-var e = document.form_weather.city; 
+var e = document.getElementById("weather_city"); 
 for (var i=e.options.length; i>0; i--) e.remove(i); 
 if (n == 0) return; 
 var a = eval("city"+ n); //得到城市的数组名 
