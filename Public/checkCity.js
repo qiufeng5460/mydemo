@@ -1,15 +1,21 @@
 // JavaScript Document
 
 //北京市辖区名称
-var city1 = ["东城区","西城区","崇文区","宣武区","朝阳区","海淀区","丰台区","石景山区","房山区","通州区","顺义区","门头沟区","昌平区","大兴区","怀柔区","平谷区","密云县","延庆县"]; 
+var city1 = ["北京市"]; 
+var cityid1 = ["WX4FBXXFKE4F"];
 //上海市辖区名称
-var city2 = ["黄浦区","卢湾区","徐汇区","长宁区","静安区","普陀区","闸北区","虹口区","杨浦区","宝山区","闵行区","嘉定区","浦东新区","金山区","松江区","青浦区","南汇区","奉贤区","崇明县"]; 
+var city2 = ["上海市"]; 
+var cityid2 = ["WTW3SJ5ZBJUY"]; 
 //天津市辖区名称
-var city3 = ["和平区","河东区","河西区","南开区","河北区","红桥区","塘沽区","汉沽区","大港区","东丽区","西青区","津南区","北辰区","武清区","宝坻区","宁河县","静海县","蓟县"]; 
+var city3 = ["天津市"]; 
+var cityid3 = ["WWGQDCW6TBW1"]; 
+
 //重庆市辖区名称
-var city4 = ["渝中区","大渡口区","江北区","沙坪坝区","九龙坡区","南岸区","北碚区","万盛区","双桥区","渝北区","巴南区","万县区","涪陵区","永川市","合川市","江津市","南川市","长寿县","綦江县","潼南县","荣昌县","壁山县","大足县","铜梁县","梁平县","城口县","垫江县","武隆县","丰都县","忠　县","开　县","云阳县","青龙镇青龙嘴","奉节县","巫山县","巫溪县","南宾镇","中和镇","钟多镇","联合镇","汉葭镇"]; 
+var city4 = ["重庆市"]; 
+var cityid4 = ["WM7B0X53DZW2"]; 
 //河北省主要城市名称
 var city5 = ["石家庄市","唐山市","秦皇岛市","邯郸市","邢台市","保定市","张家口市","承德市","沧州市","廊坊市","衡水市"];
+var cityid5 =["WWC2MYYCM6J5","WXH13WQT7XKN","WXJ51T411GRX","WW92M43YCQG0","WW96VH3U3KG5","WWFJ5S4DNJ0T","WX38NPJ1DP88","WX7C5D6581T3","WWG1FS318M6P","WX4BZD6KEJFY","WWDQ8KE95MGB"];
 //山西省主要城市名称
 var city6 = ["太原市","大同市","阳泉市","长治市","晋城市","朔州市","晋中市","运城市","忻州市","临汾市","吕梁市"];
 //辽宁省主要城市名称
@@ -72,7 +78,7 @@ var city34 = ["澳门地区"];
 var city35 = ["其它地区"];
 
 //全国省会，直辖市，自治区名称
-var provinceName = ["北京市","上海市","天津市","重庆市","河北省","山西省","辽宁省","吉林省","河南省","江苏省","浙江省","安徽省","福建省","江西省","山东省","湖北省","湖南省","广东省","海南省","四川省","贵州省","云南省","陕西省","甘肃省","青海省","黑龙江省","内蒙古自治区","广西壮族自治区","西藏自治区","宁夏回族自治区","新疆维吾尔自治区","台湾省","香港特别行政区","澳门特别行政区","其它"];
+var provinceName = ["北京市","上海市","天津市","重庆市","河北省"];
 
 
 function province() 
@@ -86,7 +92,44 @@ function cityName(n)
 { 
 var e = document.getElementById("weather_city"); 
 for (var i=e.options.length; i>0; i--) e.remove(i); 
-if (n == 0) return; 
+if (n === 0) return; 
 var a = eval("city"+ n); //得到城市的数组名 
-for (var i=0; i<a.length; i++) e.options.add(new Option(a[i], a[i])); 
+var b = eval("cityid"+ n);//get dity id
+for (var i=0; i<a.length; i++) e.options.add(new Option(a[i], b[i])); 
 } 
+
+function ShowWeather(tab,data)
+{
+    var len=tab.rows.length;
+    while(len-->1){
+        tab.deleteRow(len);
+    }
+    
+    var weather_day = ["今天","明天","后天"];
+    var results=data.results[0];
+                   
+    for (var i=0; i<results.daily.length;i++){              
+        
+        var newRow=tab.insertRow(tab.rows.length);
+        var cell = newRow.insertCell(0);
+        cell.innerHTML = weather_day[i];
+        cell = newRow.insertCell(1);
+        cell.innerHTML = results.daily[i].text_day;
+        cell = newRow.insertCell(2);
+        cell.innerHTML = results.daily[i].text_night;
+        cell = newRow.insertCell(3);
+        cell.innerHTML = results.daily[i].high;
+        cell = newRow.insertCell(4);
+        cell.innerHTML = results.daily[i].low;
+    }
+}
+
+function NeedUpdate(tab,city_id){
+    if(sessionStorage.getItem("city_id")===city_id&&tab.rows.length>1){
+        alert("Please select new city");
+        return false;
+    }
+    sessionStorage.setItem("city_id",city_id);
+    return true;
+        
+}

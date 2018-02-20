@@ -22,3 +22,4 @@ l.php
 #忽略Application下的Runtime中的文件,但保留Runtime文件夹
 Application/Runtime
 
+/nbproject/private/

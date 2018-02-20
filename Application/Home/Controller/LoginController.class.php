@@ -99,17 +99,44 @@ class LoginController extends Controller {
 	//天气信息
 	public function weather()
 	{
-		//$weather_result="Hello, Beijing";
-		//$result['nickname'] = session('nickname');
-		//$this->assign('info', $result['nickname']);
-		//$this->assign('weather_result',$weather_result);
-		//$this->display('login');
+		//user id & API key in seniverse.com
+		$uid='U618B716FE';
+		$key='ot1cuz1catvzwsn8';
+		//api for searching city
+		$api='https://api.seniverse.com/v3/weather/daily.json';
+		//$location='大兴';
+		$location = $_POST["city_id"];
+                
+		//sign verification
+		$param=array('ts'=>time(),'ttl'=>300,'uid'=>$uid);
+		//URL encode
+		$sig_data=http_build_query($param);
+		//encrypt sig_data by hash_hmac using key , then base64 encode
+		$sig=base64_encode(hash_hmac('sha1',$sig_data,$key,TRUE));
+		//make get param
+		$param['sig']=$sig;
 		
-        //use json method		
-		$province=$_POST['weather_province'];
-		$city=$_POST['weather_city'];
-        $response=array("province"=>$province,"city"=>$city);		
-        echo json_encode($response);
+                //$param['key']=$key;
+                $param['location']=$location;
+           
+		//make url
+		$url=$api.'?'.http_build_query($param);
+		
+		//init curl&set it
+		$ch=curl_init();
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,TRUE);
+		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+		$output=curl_exec($ch);
+		curl_close($ch);
+		
+
+                //$info=json_decode($output,true);
+                //$province=$info['status'];
+                //$city=$info['status_code'];
+                //$response=array("province"=>$province,"city"=>$city);		
+                //echo json_encode($response);
+                echo $output;
 
 	}
     
